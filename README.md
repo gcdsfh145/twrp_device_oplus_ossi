@@ -26,7 +26,7 @@
 
 | 输入 | 值 |
 | --- | --- |
-| `MANIFEST_BRANCH` / OrangeFox 版本 | `14.1`（推荐，Android 14 底包）或 `12.1` |
+| `MANIFEST_BRANCH` / OrangeFox 版本 | `14.1` |
 | `DEVICE_TREE` | 你 push 后的仓库地址 |
 | `DEVICE_TREE_BRANCH` | `main`（或你用的分支） |
 | `DEVICE_PATH` | `device/oplus/ossi` |
@@ -34,8 +34,23 @@
 | `BUILD_TARGET` | `recovery` |
 | `DN` / 设备名 | `OnePlus Ace 5 Pro` |
 
-> 注意：`DEVICE_NAME` 是 `ossi`，工作流会 `lunch twrp_ossi-eng && mka recoveryimage`，
-> 产物是 `out/target/product/ossi/recovery.img`。
+> 注意：`DEVICE_NAME` 是 `ossi`，产物是 `out/target/product/ossi/recovery.img`。
+
+### ⚠️ 必须改工作流里的 lunch 那一行
+
+OrangeFox `14.1` 基于 AOSP 14，`lunch` 强制三段式
+`<product>-<release>-<variant>`，而 builder 里写死的是两段式的
+`lunch twrp_${DEVICE_NAME}-eng`，会直接报
+`Invalid lunch combo: twrp_ossi-eng`。
+
+在你 fork 的 `.github/workflows/OrangeFox-Compile.yml` 里改：
+
+```diff
+-        lunch twrp_${{ inputs.DEVICE_NAME }}-eng && mka ${{ inputs.BUILD_TARGET }}image
++        lunch twrp_${{ inputs.DEVICE_NAME }}-trunk_staging-eng && mka ${{ inputs.BUILD_TARGET }}image
+```
+
+如果报 `unknown release "trunk_staging"`，把 `trunk_staging` 换成 `next` 再跑。
 
 ## 本地编译（可选）
 
