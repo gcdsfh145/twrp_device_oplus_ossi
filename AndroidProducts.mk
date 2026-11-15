@@ -11,6 +11,6 @@ PRODUCT_MAKEFILES := \
 # OrangeFox 14.1 基于 AOSP 14，lunch 必须是三段式
 # <product>-<release>-<variant>
 COMMON_LUNCH_CHOICES := \
-    twrp_ossi-trunk_staging-eng \
-    twrp_ossi-trunk_staging-userdebug \
-    twrp_ossi-trunk_staging-user
+    twrp_ossi-ap2a-eng \
+    twrp_ossi-ap2a-userdebug \
+    twrp_ossi-ap2a-user

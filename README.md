@@ -47,10 +47,10 @@ OrangeFox `14.1` 基于 AOSP 14，`lunch` 强制三段式
 
 ```diff
 -        lunch twrp_${{ inputs.DEVICE_NAME }}-eng && mka ${{ inputs.BUILD_TARGET }}image
-+        lunch twrp_${{ inputs.DEVICE_NAME }}-trunk_staging-eng && mka ${{ inputs.BUILD_TARGET }}image
++        lunch twrp_${{ inputs.DEVICE_NAME }}-ap2a-eng && mka ${{ inputs.BUILD_TARGET }}image
 ```
 
-如果报 `unknown release "trunk_staging"`，把 `trunk_staging` 换成 `next` 再跑。
+如果报 `unknown release "ap2a"`，把 `ap2a` 换成 `next` 再跑。
 
 ## 本地编译（可选）
 
